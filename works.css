@@ -8,7 +8,7 @@ html {
   scroll-behavior: smooth;
 }
 body.tutorial-page .hero-section {
-  background-image: url("work.png");
+  background-image: url("image/work.png");
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
