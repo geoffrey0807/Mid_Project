@@ -1,0 +1,1046 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #120b06; /* Prevents white flash before CSS/JS renders */
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #ffffff;
+  background-color: transparent;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(35, 22, 12, 0.2);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.about-sections,
+.gallery-container,
+.portfolio-section,
+.form-container,
+.hero-cta-container {
+  position: relative;
+  z-index: 2;
+}
+
+h1 {
+  font-family: "Trebuchet MS", Tahoma, sans-serif;
+  font-weight: bold;
+  font-size: 22px;
+  color: #bcc655;
+  margin-bottom: 10px;
+}
+
+a {
+  color: #f0e68c;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #f0e68c;
+}
+
+body.home-page {
+  background-color: #0a0c12;
+}
+
+body.home-page .main-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+body.home-page .hero-section {
+  background-image: url("image/home-bg.png");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* ========================================================
+   UNIFIED BACKGROUND & HERO LAYOUT
+   ======================================================== */
+
+/* Apply shared background image to all page types */
+body.about-page .hero-section,
+body.contact-page .hero-section,
+body.gallery-page .hero-section,
+body.portfolio-page .hero-section,
+.hero-section {
+  width: 100%;
+  min-height: 100vh;
+  background-image: url("image/bgimg.png"); /* Single shared background image path */
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Page-specific layout adjustments */
+body.about-page .hero-section,
+body.contact-page .hero-section,
+body.gallery-page .hero-section,
+body.portfolio-page .hero-section {
+  justify-content: space-between;
+}
+
+body.home-page .hero-section,
+.hero-section {
+  justify-content: flex-start;
+}
+
+/* Fallback Hero Layout */
+.hero-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-image: url("image/bgimg.png");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.hero-section h1:not(.about-sections h1):not(.about-sections *) {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  color: #e5c158;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+  letter-spacing: 1px;
+}
+
+.hero-section p:not(.about-sections p):not(.about-sections *) {
+  font-size: 1.05rem;
+  text-align: center;
+  color: #d1d1d1;
+  margin-bottom: 30px;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.8);
+}
+
+/* ========================================================
+   NAVIGATION BAR
+   ======================================================== */
+.navbar-wrapper {
+  width: 100%;
+  padding-top: clamp(16px, 3vh, 32px);
+  z-index: 10;
+}
+
+.navbar-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: clamp(6px, 1vh, 10px) clamp(16px, 3vw, 40px) clamp(12px, 2vh, 22px)
+    clamp(16px, 3vw, 40px);
+  background-color: transparent;
+  width: 100%;
+}
+
+.navbar-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 4%;
+  width: 92%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(245, 197, 66, 0.25) 15%,
+    rgba(245, 197, 66, 0.9) 45%,
+    rgba(255, 255, 255, 0.98) 50%,
+    rgba(245, 197, 66, 0.9) 55%,
+    rgba(245, 197, 66, 0.25) 85%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 10px rgba(245, 197, 66, 0.55),
+    0 0 20px rgba(245, 197, 66, 0.25);
+  border-radius: 2px;
+}
+
+.navbar-container ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(14px, 2.2vw, 36px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-container a {
+  display: inline-block;
+  padding: clamp(4px, 0.8vh, 6px) clamp(8px, 1vw, 12px);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #e9e9e9;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+}
+
+.navbar-container a.active {
+  color: #f5c542;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(245, 197, 66, 0.5);
+}
+
+/* ========================================================
+   HOME PAGE CONTENT & BUTTONS
+   ======================================================== */
+.hero-cta-container {
+  position: absolute;
+  bottom: 22%;
+  left: 6.3%;
+  z-index: 2;
+}
+
+.hero-cta-container .cta-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(8px, 1.2vw, 18px);
+  align-items: center;
+}
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(10px, 1.4vh, 16px) clamp(22px, 2.2vw, 36px);
+  font-size: clamp(13px, 1.05vw, 16px);
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 8px;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, #f5c542 0%, #e5b11b 100%);
+  color: #0b0d12;
+  border: 1px solid #ffd866;
+  box-shadow:
+    0 4px 20px rgba(245, 197, 66, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.btn--secondary {
+  background: rgba(18, 22, 32, 0.65);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+.home-content {
+  background: linear-gradient(180deg, #0a0c12 0%, #12151e 100%);
+  padding: 90px 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.home-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-top: 36px;
+}
+
+.home-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(245, 197, 66, 0.2);
+  border-radius: 8px;
+  padding: 26px;
+}
+
+.home-card h3 {
+  color: #f5c542;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.home-card p {
+  color: #cfd3dc;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.card-link {
+  color: #f5c542;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.about-sections {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: stretch;
+  gap: clamp(16px, 2.5vw, 32px);
+  width: 90%;
+  max-width: 1200px;
+  margin: 30px auto 40px auto;
+  padding: clamp(20px, 3vw, 36px);
+  background: rgba(54, 50, 13, 0.05);
+  border: 1px solid rgba(245, 197, 66, 0.2);
+  border-radius: 27px;
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+.about-sections .about-content,
+.specialskill-content {
+  min-width: 0;
+  width: 100%;
+  margin: 0;
+  min-height: auto;
+  padding: clamp(20px, 2.5vw, 32px);
+  background: rgba(111, 105, 14, 0.08);
+  border: 1px solid rgba(56, 168, 25, 0.18);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.about-sections .about-content h1,
+.specialskill-content h1 {
+  margin-bottom: 5px;
+  font-size: 40px !important;
+  color: #f5c542;
+  text-align: left !important;
+}
+
+.about-sections .about-content p,
+.specialskill-content p {
+  margin-bottom: 5px;
+  font-size: 15px !important;
+  line-height: 1.5;
+  color: #e1e3e8;
+  text-align: left !important;
+}
+
+.specialskill-content ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  justify-content: flex-start;
+}
+
+.specialskill-content li {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  font-size: 14px !important;
+  color: #f3e6b2;
+  background: rgba(245, 197, 66, 0.08);
+  border: 1px solid rgba(245, 197, 66, 0.32);
+  border-radius: 22px;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.28),
+    0 0 10px rgba(245, 197, 66, 0.1);
+}
+
+body.contact-page .hero-section h1 {
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
+body.contact-page .hero-section p {
+  margin-bottom: 12px;
+}
+
+.form-container {
+  max-width: 750px;
+  width: 90%;
+  margin: 0 auto 40px auto;
+  padding: 35px 45px;
+  background: rgba(15, 15, 15, 0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  color: #fff;
+}
+
+.input-group {
+  margin-bottom: 22px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #e0e0e0;
+}
+
+.input-group input,
+.input-group textarea {
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.input-group textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 15px;
+  margin-top: 10px;
+  background: linear-gradient(135deg, #e5c158, #b8860b);
+  border: none;
+  border-radius: 6px;
+  color: #111;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.input-group input.invalid-field,
+.input-group textarea.invalid-field {
+  border: 1px solid #ff4d4d !important;
+  box-shadow: 0 0 10px rgba(255, 77, 77, 0.4) !important;
+  background: rgba(255, 0, 0, 0.08) !important;
+}
+
+.error-msg {
+  color: #ff6b6b;
+  font-size: 0.82rem;
+  margin-top: 5px;
+  display: block;
+  font-weight: 500;
+}
+
+.char-counter {
+  display: block;
+  text-align: right;
+  font-size: 0.78rem;
+  color: #888;
+  margin-top: 4px;
+}
+
+.input-group input::placeholder,
+.input-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+  opacity: 1;
+}
+
+/* ========================================================
+   PORTFOLIO PAGE
+   ======================================================== */
+body.portfolio-page .portfolio-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 10px;
+}
+
+body.portfolio-page .portfolio-header {
+  max-width: 1350px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: left !important;
+}
+
+body.portfolio-page .portfolio-header h1,
+body.portfolio-page .portfolio-header p {
+  text-align: left !important;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1350px;
+  width: 100%;
+  margin: -15px auto 40px auto; /* Changed top margin to -15px */
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1100px) {
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.card-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 450px; /* Reduced from 500px to shorten the overall card height */
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #fff;
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  background: rgba(15, 15, 15, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Optional: Adjust paragraph height so text doesn't overflow the shorter cards */
+.card-content .card-description,
+.card-description {
+  font-size: 0.88rem;
+  color: #d1d1d1;
+  line-height: 1.4;
+  margin: 0 0 12px 0;
+  text-align: left !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+  height: auto; /* Let content dictate height naturally */
+  min-height: 0;
+}
+
+.card-image-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  /* Mask gradient to smoothly fade out the bottom of the image into the card background */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 40%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 40%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-content {
+  position: relative;
+  z-index: 1;
+  padding: 16px 20px 32px 20px; /* Reduced top padding (16px) & increased bottom padding (32px) to lift text up */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: left !important;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 15, 15, 0) 0%,
+    rgba(15, 15, 15, 0.75) 35%,
+    rgba(15, 15, 15, 0.95) 100%
+  );
+}
+
+/* 2. Tightened gap between Title and Paragraph */
+.card-content .card-title,
+.card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #e5c158;
+  margin-top: 0;
+  margin-bottom: 8px; /* Reduced gap to bring paragraph closer to heading */
+  text-align: left !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* 3. Give paragraph plenty of room so 4 lines never clip */
+.card-content .card-description,
+.card-description {
+  font-size: 0.88rem;
+  color: #d1d1d1;
+  line-height: 1.4;
+  margin: 0 0 16px 0;
+  text-align: left !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+  height: 6em; /* Increased height so all 4 lines fit comfortably without getting cut off */
+  overflow: hidden;
+}
+/* 1. Heading positioned cleanly at top with spacing below */
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #e5c158;
+  margin-top: 0;
+  margin-bottom: 24px; /* Creates the gap between heading and paragraph */
+  text-align: left;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* 2. Left-aligned paragraph sitting underneath heading */
+.card-description {
+  font-size: 0.88rem;
+  color: #d1d1d1;
+  line-height: 1.5;
+  margin: 0 0 16px 0;
+  text-align: left;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+  min-height: 4.2em; /* Keeps headings locked on the same baseline across cards */
+}
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.card-btn {
+  display: inline-block;
+  padding: 8px 18px;
+  background: linear-gradient(135deg, #e5c158, #b8860b);
+  color: #111;
+  font-weight: 600;
+  font-size: 0.88rem;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.gallery-container {
+  width: 90%;
+  max-width: 1350px;
+  margin: 20px auto 40px auto; /* Removed negative top margin */
+  padding: 0 20px;
+}
+
+/* Align the entire header section to the left */
+.gallery-header,
+.gallery-container h1,
+.gallery-container p {
+  text-align: left !important;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.gallery-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #e5c158;
+  margin-bottom: 6px;
+}
+
+.gallery-subtitle {
+  font-size: 1rem;
+  color: #d1d1d1;
+}
+
+.gallery-scroll-wrapper {
+  position: relative;
+  width: 100%;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+  max-height: 460px; /* Reduced so only 2 full rows fit */
+  overflow-y: auto; /* Enables vertical scrolling for hidden items */
+  overflow-x: hidden; /* Prevents any unwanted horizontal scrollbars */
+  padding-right: 5px;
+}
+
+.parent {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+  max-height: 470px; /* Limits the viewable area strictly to 2 rows */
+  overflow-y: auto; /* Adds vertical scrollbar for hidden items */
+  overflow-x: hidden; /* Prevents horizontal overflow */
+  padding-right: 5px; /* Space for scrollbar */
+  margin-top: -15px; /* Adjust this value (e.g., -10px to -25px) to lift the grid higher */
+  padding-top: 0;
+}
+
+.parent > div {
+  aspect-ratio: 10 / 9; /* Shorter landscape format */
+  height: auto;
+}
+
+.parent img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures images fill the shorter box without stretching */
+}
+
+/* Styled scrollbar for mouse scrolling */
+.parent::-webkit-scrollbar {
+  width: 6px;
+}
+
+.parent::-webkit-scrollbar-track {
+  background: rgba(20, 18, 22, 0.4);
+  border-radius: 4px;
+}
+
+.parent::-webkit-scrollbar-thumb {
+  background: rgba(229, 193, 88, 0.5);
+  border-radius: 4px;
+}
+/* Video Preview Cards without images */
+.gallery-item.video-item {
+  position: relative;
+  background: rgba(20, 18, 22, 0.85);
+  border: 1px solid rgba(229, 193, 88, 0.3);
+  border-radius: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 52px;
+  height: 52px;
+  background: rgba(20, 18, 22, 0.85);
+  color: #e5c158;
+  border: 2px solid #e5c158;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  padding-left: 3px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.modal-content-video {
+  width: 80vw;
+  max-width: 900px;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(229, 193, 88, 0.3);
+}
+
+.modal-content-video iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.gallery-item.video-item {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(229, 193, 88, 0.3);
+  background: #000;
+  cursor: pointer;
+}
+
+.gallery-item.video-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.gallery-item.video-item iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* 1. Set a fixed height for each gallery card container */
+.gallery-item {
+  width: 100%;
+  aspect-ratio: 3 / 3; /* Ensures all thumbnails maintain consistent proportions */
+  height: auto;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(229, 193, 88, 0.25);
+  background: rgba(15, 15, 15, 0.35);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 40px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.modal-content {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.6),
+    0 0 25px rgba(245, 197, 66, 0.25);
+  transform: scale(0.82);
+}
+
+.modal-content img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+}
+
+.modal-close {
+  position: absolute;
+  top: 25px;
+  right: 35px;
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: #ffffff;
+  cursor: pointer;
+  z-index: 1001;
+  line-height: 1;
+  user-select: none;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.modal-overlay.active .modal-content {
+  transform: scale(1);
+}
+
+.modal-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  color: #f5c542;
+  width: 48px;
+  height: 80px;
+  border-radius: 12px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1002;
+  user-select: none;
+}
+
+.modal-prev {
+  left: 20px;
+}
+.modal-next {
+  right: 20px;
+}
+
+.video-modal-prev {
+  left: 20px;
+}
+
+.video-modal-next {
+  right: 20px;
+}
+
+/* Ensure video content area leaves room for the arrows on screen */
+.modal-content-video {
+  max-width: 80vw;
+  width: 800px;
+  position: relative;
+  z-index: 1001;
+}
+
+.site-footer {
+  position: relative;
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+  padding: 30px 16px 5px;
+  background: transparent;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: clamp(14px, 1.25vw, 18px);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.site-footer p {
+  margin: 0;
+  line-height: 1;
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 4%;
+  width: 92%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(245, 197, 66, 0.25) 15%,
+    rgba(245, 197, 66, 0.9) 45%,
+    rgba(255, 255, 255, 0.98) 50%,
+    rgba(245, 197, 66, 0.9) 55%,
+    rgba(245, 197, 66, 0.25) 85%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 10px rgba(245, 197, 66, 0.55),
+    0 0 20px rgba(245, 197, 66, 0.25);
+  border-radius: 2px;
+}
+
+@media (max-width: 1024px) {
+  .parent {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  body:not(.home-page) {
+    background-attachment: scroll;
+  }
+
+  .about-sections {
+    grid-template-columns: 1fr;
+    margin-top: 24px;
+  }
+
+  .navbar-wrapper {
+    padding-top: 20px;
+  }
+
+  .navbar-container {
+    padding: 10px 16px 18px 16px;
+  }
+
+  .navbar-container ul {
+    gap: 16px;
+  }
+
+  .navbar-container a {
+    font-size: 14px;
+    padding: 4px 8px;
+  }
+
+  .hero-cta-container {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin-top: auto;
+    margin-bottom: 48px;
+    padding: 0 24px;
+    justify-content: center;
+  }
+
+  .hero-cta-container .cta-buttons {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .parent {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cards-container {
+    grid-template-columns: 1fr;
+  }
+}

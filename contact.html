@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me | Geoffinitix</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animation.css">
+</head>
+
+<body class="contact-page">
+    <div class="main-container">
+
+        <section class="hero-section">
+            <header class="navbar-wrapper">
+                <nav class="navbar-container">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Me</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="contact.html" class="active">Contact</a></li>
+                    </ul>
+                </nav>
+            </header>
+
+
+            <h1>Direct Message</h1>
+            <p>If you have any concern or suggestion, feel free to send me a message!</p>
+
+            <div class="form-container">
+                <form id="contactForm" action="#" method="POST">
+                    <div class="input-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="e.g., Juan dela Cruz" />
+                    </div>
+
+                    <div class="input-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="e.g., juandelacruz@example.com" />
+                    </div>
+
+                    <div class="input-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" placeholder="e.g., Project Inquiry" />
+                    </div>
+
+                    <div class="input-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5"
+                            placeholder="Write your message here..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+
+            <div id="music-notes-container"></div>
+
+            <footer class="site-footer">
+                <p>&copy; 2026 Geoffinitix. All rights reserved.</p>
+            </footer>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("contactForm");
+            const inputs = form.querySelectorAll("input, textarea");
+            const messageInput = document.getElementById("message");
+            const charCounter = document.getElementById("charCounter");
+
+            // Real-time email validation helper
+            function isValidEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email.toLowerCase());
+            }
+
+            // 1. Live Character Counter for Message field
+            if (messageInput && charCounter) {
+                messageInput.addEventListener("input", () => {
+                    const currentLength = messageInput.value.length;
+                    charCounter.textContent = `${currentLength} / 500 characters`;
+                    if (currentLength > 450) {
+                        charCounter.style.color = "#ff6b6b";
+                    } else {
+                        charCounter.style.color = "#888";
+                    }
+                });
+            }
+
+            // 2. Clear error styles as the user types
+            inputs.forEach((input) => {
+                input.addEventListener("input", () => {
+                    if (input.value.trim() !== "") {
+                        input.classList.remove("invalid-field");
+                        const errorMsg = input.parentElement.querySelector(".error-msg");
+                        if (errorMsg) errorMsg.remove();
+                    }
+                });
+            });
+
+            // 3. Form Submission Handling
+            form.addEventListener("submit", function (e) {
+                e.preventDefault(); // Prevent default page refresh
+
+                let isValid = true;
+
+                // Clear previous error messages
+                document.querySelectorAll(".error-msg").forEach((msg) => msg.remove());
+
+                inputs.forEach((input) => {
+                    const val = input.value.trim();
+                    let hasError = false;
+                    let errorText = "";
+
+                    // Check for empty inputs
+                    if (val === "") {
+                        hasError = true;
+                        errorText = "This field is required.";
+                    }
+                    // Specific check for email format
+                    else if (input.type === "email" && !isValidEmail(val)) {
+                        hasError = true;
+                        errorText = "Please enter a valid email address.";
+                    }
+
+                    if (hasError) {
+                        isValid = false;
+                        input.classList.add("invalid-field");
+
+                        // Inject dynamic error message below input
+                        const errorElement = document.createElement("span");
+                        errorElement.className = "error-msg";
+                        errorElement.innerText = errorText;
+                        input.parentElement.appendChild(errorElement);
+                    } else {
+                        input.classList.remove("invalid-field");
+                    }
+                });
+
+                // Success Action
+                if (isValid) {
+                    // Custom popup alert
+                    alert("Thank you! Your message has been sent successfully.");
+
+                    // Reset form fields
+                    form.reset();
+                    if (charCounter) charCounter.textContent = "0 / 500 characters";
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

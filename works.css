@@ -1,0 +1,337 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body.tutorial-page .hero-section {
+  background-image: url("work.png");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+body.tutorial-page {
+  /* Toned-down, warm caramel/amber gradient with moderate lightness */
+  background-attachment: fixed;
+  font-family:
+    "Segoe UI",
+    -apple-system,
+    BlinkMacSystemFont,
+    Roboto,
+    sans-serif;
+  color: #ffffff;
+  min-height: 100vh;
+}
+
+body.tutorial-page .hero-section {
+  min-height: 0;
+  padding: 0 16px;
+  display: block;
+}
+
+.parent {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1800px;
+  width: 98%;
+  margin: 0 auto 40px;
+}
+
+.div1 {
+  grid-column: 1 / -1;
+}
+
+.div2 {
+  grid-column: 1 / 2;
+  grid-row: 2 / 10;
+  position: sticky;
+  top: 20px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+}
+
+.div3,
+.div4,
+.div5,
+.div6,
+.div7,
+.div8,
+.div9,
+.div10,
+.div11,
+.div12 {
+  grid-column: 2 / -1;
+}
+
+.page-header {
+  background: transparent;
+  padding: 16px 0 24px 0;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.page-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(254, 215, 170, 0.4) 20%,
+    #ffedd5 50%,
+    rgba(254, 215, 170, 0.4) 80%,
+    transparent 100%
+  );
+  box-shadow: 0 0 10px rgba(255, 237, 213, 0.3);
+}
+
+.return-btn,
+.return-btn:link,
+.return-btn:visited {
+  color: #ffedd5 !important;
+  position: absolute;
+  top: 12px;
+  left: 0;
+  text-decoration: none;
+  font-size: 32px;
+  font-weight: 700;
+  background: transparent !important;
+  border: none !important;
+  display: inline-block;
+  line-height: 1;
+  z-index: 5;
+}
+
+.page-header h1 {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 2px;
+  text-align: center;
+  margin-top: 0;
+  line-height: 1.1;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.subheading {
+  font-size: 14px;
+  color: #ffedd5;
+  margin-top: 8px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.tutorial-sidebar {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.tutorial-sidebar h2 {
+  font-size: 25px;
+  color: #ffffff;
+  font-weight: 800;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.topic-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-item,
+.nav-item:link,
+.nav-item:visited {
+  color: #ffffff !important;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 400;
+  padding: 10px 14px;
+  background: rgba(231, 229, 211, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 8px;
+}
+
+.tutorial-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+.tutorial-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.topic-card {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  overflow: hidden;
+  scroll-margin-top: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  padding: 20px 24px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+}
+
+.topic-tag {
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  display: block;
+  margin-bottom: 4px;
+  color: #ffedd5;
+}
+
+.card-header h3 {
+  font-size: 22px;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.chevron {
+  color: #ffedd5;
+  font-size: 14px;
+}
+
+.card-body {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 24px;
+}
+
+.topic-card.active .card-body {
+  max-height: 2000px;
+  padding: 0 24px 24px 24px;
+}
+
+.card-body ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card-body li {
+  font-size: 15px;
+  color: #ffffff;
+  position: relative;
+  padding-left: 20px;
+  line-height: 1.6;
+}
+
+.card-body li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #ffedd5;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.image-step-wrapper {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin: 12px 0 16px 0;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  padding: 16px !important;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.image-step-wrapper::before {
+  content: "" !important;
+}
+
+.topic-card .topic-image {
+  width: 100%;
+  max-width: 520px;
+  max-height: 320px;
+  object-fit: contain;
+  border-radius: 8px;
+  display: block;
+  margin: 0 0 14px 0;
+  background: #000000;
+}
+
+.steps-text p {
+  margin-bottom: 8px;
+  line-height: 1.6;
+  color: #f8fafc;
+  font-size: 14.5px;
+}
+
+.steps-text p strong i {
+  color: #ffedd5;
+}
+
+.site-footer {
+  position: relative;
+  width: 100%;
+  padding: 32px 24px;
+  color: #ffedd5;
+  font-weight: 600;
+  font-size: 14px;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 5%;
+  width: 90%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 1024px) {
+  .parent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .div2 {
+    position: static;
+    max-height: none;
+  }
+
+  .return-btn {
+    position: relative;
+    top: 0;
+    margin-bottom: 12px;
+  }
+}
