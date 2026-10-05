@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me | Geoffinitix</title>
+    <title>Contact | Geoffinitix</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="animation.css">
 </head>
@@ -19,41 +19,81 @@
                         <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About Me</a></li>
                         <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="portfolio.html">Discover</a></li>
                         <li><a href="contact.html" class="active">Contact</a></li>
                     </ul>
                 </nav>
             </header>
 
+            <!-- Single Outer Enclosing Container -->
+            <div class="contact-wrapper">
+                <!-- Left Side: Contact Information (Smaller Width) -->
+                <div class="contact-info-container">
+                    <h2>Direct Message</h2>
+                    <p>If you have any concern or suggestion, feel free to send me a message!</p>
 
-            <h1>Direct Message</h1>
-            <p>If you have any concern or suggestion, feel free to send me a message!</p>
-
-            <div class="form-container">
-                <form id="contactForm" action="#" method="POST">
-                    <div class="input-group">
-                        <label for="name">Your Name</label>
-                        <input type="text" id="name" name="name" placeholder="e.g., Juan dela Cruz" />
+                    <div class="info-item">
+                        <span class="info-label">Email</span>
+                        <p><a href="mailto:geoffreydael934@gmail.com">geoffreydael934@gmail.com</a></p>
                     </div>
 
-                    <div class="input-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" placeholder="e.g., juandelacruz@example.com" />
+                    <div class="info-item">
+                        <span class="info-label">Phone / Mobile</span>
+                        <p>+63 993 093 7219</p>
                     </div>
 
-                    <div class="input-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject" placeholder="e.g., Project Inquiry" />
+                    <div class="info-item">
+                        <span class="info-label">Location</span>
+                        <p>Calamba, Laguna, Philippines</p>
                     </div>
 
-                    <div class="input-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="5"
-                            placeholder="Write your message here..."></textarea>
+                    <div class="info-item">
+                        <span class="info-label">Socials</span>
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/geoffreydael8920" target="_blank">Facebook</a>
+                            <a href="https://www.tiktok.com/@_jep_oy?is_from_webapp=1&sender_device=pc"
+                                target="_blank">Tiktok</a>
+                        </div>
                     </div>
+                </div>
 
-                    <button type="submit" class="submit-btn">Send Message</button>
-                </form>
+                <!-- Right Side: Contact Form (Larger Width) -->
+                <div class="form-container">
+                    <form id="contactForm" action="#" method="POST">
+                        <div class="input-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" placeholder="e.g., Juan dela Cruz" />
+                        </div>
+
+                        <div class="input-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="e.g., juandelacruz@example.com" />
+                        </div>
+
+                        <div class="input-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" placeholder="e.g., Project Inquiry" />
+                        </div>
+
+                        <div class="input-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5"
+                                placeholder="Write your message here..."></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Custom Alert Modal -->
+            <div id="customAlert" class="custom-alert-overlay">
+                <div class="custom-alert-box">
+                    <div class="custom-alert-icon">✓</div>
+                    <h3>Success!</h3>
+                    <p id="customAlertMessage">Thank you! Your message has been sent successfully.</p>
+                    <button id="customAlertBtn" class="submit-btn">OK</button>
+                </div>
             </div>
 
             <div id="music-notes-container"></div>
@@ -66,51 +106,35 @@
 
     <script src="script.js"></script>
 
-
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const form = document.getElementById("contactForm");
             const inputs = form.querySelectorAll("input, textarea");
-            const messageInput = document.getElementById("message");
             const charCounter = document.getElementById("charCounter");
 
-            // Real-time email validation helper
+            // Custom Alert Modal Elements
+            const customAlert = document.getElementById("customAlert");
+            const customAlertBtn = document.getElementById("customAlertBtn");
+
+            // Helper function for email validation
             function isValidEmail(email) {
-                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return re.test(email.toLowerCase());
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
             }
 
-            // 1. Live Character Counter for Message field
-            if (messageInput && charCounter) {
-                messageInput.addEventListener("input", () => {
-                    const currentLength = messageInput.value.length;
-                    charCounter.textContent = `${currentLength} / 500 characters`;
-                    if (currentLength > 450) {
-                        charCounter.style.color = "#ff6b6b";
-                    } else {
-                        charCounter.style.color = "#888";
-                    }
+            function showAlert() {
+                if (customAlert) customAlert.classList.add("active");
+            }
+
+            if (customAlertBtn) {
+                customAlertBtn.addEventListener("click", () => {
+                    customAlert.classList.remove("active");
                 });
             }
 
-            // 2. Clear error styles as the user types
-            inputs.forEach((input) => {
-                input.addEventListener("input", () => {
-                    if (input.value.trim() !== "") {
-                        input.classList.remove("invalid-field");
-                        const errorMsg = input.parentElement.querySelector(".error-msg");
-                        if (errorMsg) errorMsg.remove();
-                    }
-                });
-            });
-
-            // 3. Form Submission Handling
             form.addEventListener("submit", function (e) {
-                e.preventDefault(); // Prevent default page refresh
+                e.preventDefault();
 
                 let isValid = true;
-
-                // Clear previous error messages
                 document.querySelectorAll(".error-msg").forEach((msg) => msg.remove());
 
                 inputs.forEach((input) => {
@@ -118,13 +142,10 @@
                     let hasError = false;
                     let errorText = "";
 
-                    // Check for empty inputs
                     if (val === "") {
                         hasError = true;
                         errorText = "This field is required.";
-                    }
-                    // Specific check for email format
-                    else if (input.type === "email" && !isValidEmail(val)) {
+                    } else if (input.type === "email" && !isValidEmail(val)) {
                         hasError = true;
                         errorText = "Please enter a valid email address.";
                     }
@@ -133,7 +154,6 @@
                         isValid = false;
                         input.classList.add("invalid-field");
 
-                        // Inject dynamic error message below input
                         const errorElement = document.createElement("span");
                         errorElement.className = "error-msg";
                         errorElement.innerText = errorText;
@@ -143,10 +163,9 @@
                     }
                 });
 
-                // Success Action
                 if (isValid) {
-                    // Custom popup alert
-                    alert("Thank you! Your message has been sent successfully.");
+                    // Trigger Custom Modal Alert
+                    showAlert();
 
                     // Reset form fields
                     form.reset();
