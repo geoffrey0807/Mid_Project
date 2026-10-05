@@ -101,6 +101,12 @@ body.gallery-page .hero-section,
 body.portfolio-page .hero-section {
   justify-content: space-between;
 }
+body.about-page .hero-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
 body.home-page .hero-section,
 .hero-section {
@@ -311,53 +317,77 @@ body.home-page .hero-section,
 }
 
 .about-sections {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  align-items: stretch;
-  gap: clamp(16px, 2.5vw, 32px);
-  width: 90%;
+  display: flex;
   max-width: 1200px;
-  margin: 30px auto 40px auto;
-  padding: clamp(20px, 3vw, 36px);
-  background: rgba(54, 50, 13, 0.05);
-  border: 1px solid rgba(245, 197, 66, 0.2);
-  border-radius: 27px;
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
-  box-sizing: border-box;
+  width: 90%;
+  /* Increased top margin from 30px to 60px (or 70px) to drop it further down */
+  margin: 65px auto 40px auto;
+  background: rgba(15, 15, 15, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  padding: 0;
 }
 
 .about-sections .about-content,
 .specialskill-content {
-  min-width: 0;
-  width: 100%;
-  margin: 0;
-  min-height: auto;
-  padding: clamp(20px, 2.5vw, 32px);
-  background: rgba(111, 105, 14, 0.08);
-  border: 1px solid rgba(56, 168, 25, 0.18);
-  border-radius: 8px;
+  padding: 50px 45px; /* Adds comfortable top/bottom room for text */
+}
+/* Left Column: Meet Geoff (Takes up much more width ~65%) */
+.about-sections .about-content {
+  flex: 1.8;
+  padding: 40px;
+  background: transparent;
+  border: none;
+  border-right: 1px solid rgba(255, 215, 0, 0.15); /* Vertical dividing line */
+  border-radius: 0;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  box-sizing: border-box;
-  text-align: left;
 }
 
+/* Right Column: What I Do (Takes up ~35%) */
+.specialskill-content {
+  flex: 1;
+  padding: 40px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Responsive Collapse for Tablet/Mobile */
+@media (max-width: 850px) {
+  .about-sections {
+    flex-direction: column;
+  }
+
+  .about-sections .about-content {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+  }
+}
+
+/* Section Headings ("Meet Geoff" & "What I Do") */
 .about-sections .about-content h1,
 .specialskill-content h1 {
-  margin-bottom: 5px;
-  font-size: 40px !important;
+  margin-bottom: 12px;
+  font-size: 2.2rem !important; /* Increased heading size (approx 35px) */
   color: #f5c542;
   text-align: left !important;
 }
 
+/* Paragraph Body Text */
 .about-sections .about-content p,
 .specialskill-content p {
-  margin-bottom: 5px;
-  font-size: 15px !important;
-  line-height: 1.5;
+  margin-bottom: 12px;
+  font-size: 1.05rem !important; /* Increased body text for better readability */
+  line-height: 1.6;
   color: #e1e3e8;
   text-align: left !important;
 }
@@ -365,25 +395,26 @@ body.home-page .hero-section,
 .specialskill-content ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin: 8px 0 0;
+  gap: 12px; /* Slightly increased spacing between pills */
+  margin: 16px 0 0 0;
   padding: 0;
   list-style: none;
   justify-content: flex-start;
 }
-
+/* Style for individual skill pills */
 .specialskill-content li {
   display: inline-flex;
   align-items: center;
-  padding: 5px 10px;
-  font-size: 14px !important;
+  padding: 8px 16px; /* Increased padding inside pills */
+  font-size: 0.95rem !important; /* Enlarged text size for better legibility */
+  font-weight: 600; /* Medium-bold for sharper text */
+  letter-spacing: 0.3px; /* Subtle spacing between letters */
   color: #f3e6b2;
-  background: rgba(245, 197, 66, 0.08);
-  border: 1px solid rgba(245, 197, 66, 0.32);
-  border-radius: 22px;
-  box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.28),
-    0 0 10px rgba(245, 197, 66, 0.1);
+  background: rgba(245, 197, 66, 0.1);
+  border: 1px solid rgba(245, 197, 66, 0.4);
+  border-radius: 20px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
 }
 
 body.contact-page .hero-section h1 {
@@ -484,6 +515,112 @@ body.contact-page .hero-section p {
   opacity: 1;
 }
 
+.contact-wrapper {
+  display: flex;
+  max-width: 1000px;
+  width: 90%;
+  /* Change top margin from 0 to 40px (or 50px) to drop it down */
+  margin: 50px auto 40px auto;
+  background: rgba(15, 15, 15, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+
+/* Left Column: Contact Information (Smaller Width) */
+.contact-info-container {
+  flex: 1; /* ~35% - 40% width */
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.2);
+  border-right: 1px solid rgba(255, 215, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-info-container h2 {
+  font-family: "Trebuchet MS", Tahoma, sans-serif;
+  font-size: 1.6rem;
+  color: #e5c158;
+  margin-bottom: 12px;
+}
+
+.contact-info-container p {
+  text-align: left !important;
+  color: #d1d1d1;
+  font-size: 0.92rem;
+  margin-bottom: 24px;
+}
+
+.info-item {
+  margin-bottom: 20px;
+}
+
+.info-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #f5c542;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.info-item p {
+  margin-bottom: 0;
+  font-size: 0.95rem;
+  color: #ffffff;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+  margin-top: 6px;
+}
+
+.social-links a {
+  color: #f0e68c;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.social-links a:hover {
+  color: #f5c542;
+  text-decoration: underline;
+}
+
+/* Right Column: Message Form (Larger Width) */
+.form-container {
+  flex: 1.6; /* ~60% - 65% width */
+  padding: 40px;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Responsive collapse for tablet/mobile screens */
+@media (max-width: 850px) {
+  .contact-wrapper {
+    flex-direction: column;
+  }
+
+  .contact-info-container {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+  }
+}
+
 /* ========================================================
    PORTFOLIO PAGE
    ======================================================== */
@@ -510,27 +647,32 @@ body.portfolio-page .portfolio-header p {
 
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr); /* Updated from repeat(4, 1fr) */
   gap: 20px;
   max-width: 1350px;
   width: 100%;
-  margin: -15px auto 40px auto; /* Changed top margin to -15px */
+  margin: -5px auto 40px auto;
   padding: 0 20px;
   box-sizing: border-box;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 900px) {
   .cards-container {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
+@media (max-width: 600px) {
+  .cards-container {
+    grid-template-columns: 1fr;
+  }
+}
 .card-item {
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  min-height: 450px; /* Reduced from 500px to shorten the overall card height */
+  min-height: 500px; /* Reduced from 500px to shorten the overall card height */
   border-radius: 16px;
   overflow: hidden;
   text-decoration: none;
@@ -580,46 +722,48 @@ body.portfolio-page .portfolio-header p {
   object-fit: cover;
 }
 
+/* Card Content Container */
 .card-content {
   position: relative;
   z-index: 1;
-  padding: 16px 20px 32px 20px; /* Reduced top padding (16px) & increased bottom padding (32px) to lift text up */
+  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   text-align: left !important;
-
   background: linear-gradient(
     to bottom,
-    rgba(15, 15, 15, 0) 0%,
-    rgba(15, 15, 15, 0.75) 35%,
-    rgba(15, 15, 15, 0.95) 100%
+    rgba(124, 101, 67, 0) 0%,
+    rgba(80, 54, 11, 0.8) 40%,
+    rgba(42, 24, 0, 0.95) 100%
   );
 }
 
-/* 2. Tightened gap between Title and Paragraph */
+/* Card Title: Give a fixed height so multi-line titles align nicely */
 .card-content .card-title,
 .card-title {
   font-size: 1.15rem;
   font-weight: 700;
   color: #e5c158;
   margin-top: 0;
-  margin-bottom: 8px; /* Reduced gap to bring paragraph closer to heading */
+  margin-bottom: 10px;
+  min-height: 2.8em; /* Ensures title baselines align across all 3 cards */
+  display: flex;
+  align-items: flex-end;
   text-align: left !important;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
-/* 3. Give paragraph plenty of room so 4 lines never clip */
+/* Card Description (<p>): Set a matching min-height so the paragraphs and EXPLORE buttons align horizontally */
 .card-content .card-description,
 .card-description {
   font-size: 0.88rem;
   color: #d1d1d1;
-  line-height: 1.4;
+  line-height: 1.45;
   margin: 0 0 16px 0;
+  min-height: 4.5em; /* Holds consistent space across 3-line and 4-line descriptions */
   text-align: left !important;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
-  height: 6em; /* Increased height so all 4 lines fit comfortably without getting cut off */
-  overflow: hidden;
 }
 /* 1. Heading positioned cleanly at top with spacing below */
 .card-title {
@@ -987,60 +1131,117 @@ body.portfolio-page .portfolio-header p {
   }
 }
 
-@media (max-width: 900px) {
-  .cards-container {
-    grid-template-columns: repeat(2, 1fr);
+@media (max-width: 768px) {
+  /* Reduce navbar wrapper padding on top */
+  .navbar-wrapper {
+    padding-top: 12px;
+  }
+
+  /* Center alignment and tighten container padding */
+  .navbar-container {
+    justify-content: center;
+    padding: 8px 12px 14px 12px;
+  }
+
+  /* Reduce gap between menu items so all fit on one row */
+  .navbar-container ul {
+    gap: 8px; /* Tighter spacing between links */
+  }
+
+  /* Lower font size & padding for individual navbar links */
+  .navbar-container a {
+    font-size: 14px; /* Scaled down for mobile */
+    padding: 3px 6px;
+    letter-spacing: 0; /* Tightens text width */
   }
 }
 
-@media (max-width: 768px) {
-  body:not(.home-page) {
-    background-attachment: scroll;
-  }
-
-  .about-sections {
-    grid-template-columns: 1fr;
-    margin-top: 24px;
-  }
-
-  .navbar-wrapper {
-    padding-top: 20px;
-  }
-
-  .navbar-container {
-    padding: 10px 16px 18px 16px;
-  }
-
+@media (max-width: 400px) {
+  /* Extra tight adjustments for smaller phone screens */
   .navbar-container ul {
-    gap: 16px;
+    gap: 4px;
   }
 
   .navbar-container a {
-    font-size: 14px;
-    padding: 4px 8px;
-  }
-
-  .hero-cta-container {
-    position: relative;
-    top: auto;
-    left: auto;
-    margin-top: auto;
-    margin-bottom: 48px;
-    padding: 0 24px;
-    justify-content: center;
-  }
-
-  .hero-cta-container .cta-buttons {
-    justify-content: center;
+    font-size: 10px;
+    padding: 2px 4px;
   }
 }
+/* Custom Alert Overlay */
+.custom-alert-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
 
-@media (max-width: 600px) {
-  .parent {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.custom-alert-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
 
-  .cards-container {
-    grid-template-columns: 1fr;
-  }
+/* Custom Alert Popup Box */
+.custom-alert-box {
+  background: rgba(20, 20, 20, 0.95);
+  border: 1px solid rgba(245, 197, 66, 0.5);
+  border-radius: 16px;
+  padding: 30px 40px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.7),
+    0 0 20px rgba(245, 197, 66, 0.2);
+  transform: scale(0.8);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.custom-alert-overlay.active .custom-alert-box {
+  transform: scale(1);
+}
+
+.custom-alert-icon {
+  width: 50px;
+  height: 50px;
+  background: rgba(245, 197, 66, 0.15);
+  color: #f5c542;
+  border: 2px solid #f5c542;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 auto 15px auto;
+}
+
+.custom-alert-box h3 {
+  color: #f5c542;
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.custom-alert-box p {
+  color: #d1d1d1;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  text-align: center !important;
+}
+
+.custom-alert-box .submit-btn {
+  padding: 10px 25px;
+  margin-top: 0;
 }

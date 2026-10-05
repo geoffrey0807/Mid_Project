@@ -11,10 +11,12 @@ body.page-loaded::before {
   opacity: 1;
 }
 
+/* Add .contact-wrapper to the animated elements */
 .about-sections,
 .gallery-container,
 .portfolio-section,
 .form-container,
+.contact-wrapper,
 .hero-cta-container {
   opacity: 0;
   transform: translateY(25px);
@@ -23,10 +25,12 @@ body.page-loaded::before {
     transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Trigger reveal animation when page loads */
 body.page-loaded .about-sections,
 body.page-loaded .gallery-container,
 body.page-loaded .portfolio-section,
 body.page-loaded .form-container,
+body.page-loaded .contact-wrapper,
 body.page-loaded .hero-cta-container {
   opacity: 1;
   transform: translateY(0);
